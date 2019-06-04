@@ -369,16 +369,20 @@ def count(request):
     print(en2_1)
     print(user_text)
 
-    en1_1 = 'A'
-    en2_1 = 'B'
-    user_text = 'A and B'
+    # en1_1 = 'A'
+    # en2_1 = 'B'
+    # user_text = 'A and B'
+
+    a = str(en1_1)
+    b = str(en2_1)
+    c = str(user_text)
 
     print('---------------------count---------------------')
-    ans = single_judge(en1_1, en2_1, user_text) #这里改一下试试，变量要改的
+    ans = single_judge(a, b, c) #这里改一下试试，变量要改的
     #ans = single_judge('A', 'B', 'AandB')
     print('---------------------count1---------------------')
     return render(request, 'count.html', {'count': total_count,
-    	'text': user_text, 'en1': en1_1, 'en2': en2_1, 'relation': ans})
+    	'text': c, 'en1': a, 'en2': b, 'relation': ans})
     # render可以向html中传递信息，使用字典的方式
 
 '''
