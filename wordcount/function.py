@@ -3,6 +3,7 @@ from django.shortcuts import render  # 传网页给用户
 
 import tensorflow as tf
 import numpy as np
+#import chardet
 #import network
 
 # FLAGS = tf.app.flags.FLAGS
@@ -169,7 +170,7 @@ class GRU:
 def single_judge(en1, en2, sentence):
     # If you retrain the model,
     # please remember to change the path to your own model below:
-    pathname = "./modelA/ATT_GRU_model-3500"
+    pathname = "C:/Users/C/Desktop/Git_re/wordcount/wordcount/modelA/ATT_GRU_model-3500"
 
     wordembedding = np.load('C:/Users/C/Desktop/Git_re/wordcount/wordcount/vec.npy')
     test_settings = Settings()
@@ -226,7 +227,7 @@ def single_judge(en1, en2, sentence):
             print('reading word embedding data...')
             vec = []
             word2id = {}
-            f = open('./origin_dataA/vec.txt', encoding='utf-8')
+            f = open('C:/Users/C/Desktop/Git_re/wordcount/wordcount/origin_dataA/vec.txt', encoding='utf-8')
             content = f.readline()
             content = content.strip().split()
             dim = int(content[1])
@@ -246,7 +247,7 @@ def single_judge(en1, en2, sentence):
             print('reading relation to id')
             relation2id = {}
             id2relation = {}
-            f = open('./origin_dataA/relation2id.txt', 'r', encoding='utf-8')
+            f = open('C:/Users/C/Desktop/Git_re/wordcount/wordcount/origin_dataA/relation2id.txt', 'r', encoding='utf-8')
             while True:
                 content = f.readline()
                 if content == '':
@@ -355,20 +356,57 @@ def single_judge(en1, en2, sentence):
 def home(request):
     return render(request, 'home.html')
 
-
 def count(request):
+    en1_1 = 'A'
+    en2_1 = 'B'
+    user_text = 'A and B'
     total_count = len(request.GET['text'])  # text是字典形式的
     user_text = request.GET['text']
     en1_1 = request.GET['en1']
     en2_1 = request.GET['en2']
     ans = 'null'
+    print(en1_1)
+    print(en2_1)
+    print(user_text)
+
+    en1_1 = 'A'
+    en2_1 = 'B'
+    user_text = 'A and B'
+
     print('---------------------count---------------------')
-    #ans = single_judge(en1_1, en2_1, user_text) //这里改一下试试，变量要改的
+    ans = single_judge(en1_1, en2_1, user_text) #这里改一下试试，变量要改的
     #ans = single_judge('A', 'B', 'AandB')
     print('---------------------count1---------------------')
     return render(request, 'count.html', {'count': total_count,
     	'text': user_text, 'en1': en1_1, 'en2': en2_1, 'relation': ans})
     # render可以向html中传递信息，使用字典的方式
+
+'''
+def extraction(request):
+    en1_1 = 'A'
+    en2_1 = 'B'
+    user_text = 'A and B'
+    total_count = len(request.GET['text'])  # text是字典形式的
+    user_text = request.GET['text']
+    en1_1 = request.GET['en1']
+    en2_1 = request.GET['en2']
+    ans = 'null'
+    print(en1_1)
+    print(en2_1)
+    print(user_text)
+
+    en1_1 = 'A'
+    en2_1 = 'B'
+    user_text = 'A and B'
+    
+    print('---------------------count---------------------')
+    ans = single_judge(en1_1, en2_1, user_text) #这里改一下试试，变量要改的
+    #ans = single_judge('A', 'B', 'AandB')
+    print('---------------------count1---------------------')
+    return render(request, 'count.html', {'count': total_count,
+        'text': user_text, 'en1': en1_1, 'en2': en2_1, 'relation': ans})
+    # render可以向html中传递信息，使用字典的方式
+    '''
 
 def about(request):
     return render(request, 'about.html')

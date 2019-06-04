@@ -2,6 +2,7 @@
 
 import tensorflow as tf
 import sys
+import function
 sys.path.append('./model/')
 import single_judge
 
@@ -17,7 +18,8 @@ ans = single_judge.single_judge(en1_1, en2_1, text)
 '''
 def main1(en1_1,en2_1,text):
     ans = 'null'
-    ans = single_judge.single_judge(en1_1, en2_1, text)
+    #ans = single_judge.single_judge(en1_1, en2_1, text)
+    ans = function.single_judge(en1_1, en2_1, text)
 
 main1('A','B','AdfjskldfjklB')
 
