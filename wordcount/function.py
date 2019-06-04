@@ -345,10 +345,12 @@ def single_judge(en1, en2, sentence):
                 print("关系是:")
                 # print(prob)
                 top3_id = prob.argsort()[-3:][::-1]
+                final_relation=[]
                 for n, rel_id in enumerate(top3_id):
                     ans = "No." + str(n+1) + ": " + id2relation[rel_id] + ", Probability is " + str(prob[rel_id])
                     print("No." + str(n+1) + ": " + id2relation[rel_id] + ", Probability is " + str(prob[rel_id]))
-                return ans
+                    final_relation.append(ans)
+                return final_relation
             except Exception as e:
                 print(e)
 #=================================================================
@@ -381,8 +383,10 @@ def count(request):
     ans = single_judge(a, b, c) #这里改一下试试，变量要改的
     #ans = single_judge('A', 'B', 'AandB')
     print('---------------------count1---------------------')
+    print(type(ans))
     return render(request, 'count.html', {'count': total_count,
-    	'text': c, 'en1': a, 'en2': b, 'relation': ans})
+    	'text': c, 'en1': a, 'en2': b, 'relation0': ans[0],
+        'relation1': ans[1],'relation2': ans[2]})
     # render可以向html中传递信息，使用字典的方式
 
 '''
